@@ -50,12 +50,8 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 	</title>
 </head>
 <body>
-	<h1>
-		Blog Title
-	</h1>
-	<p>
-		This paragraph summarises what the blog is about.
-	</p>
+    <?php require_once "templates/title.php"; ?>
+	
 
 	<h2>
 		<?php echo htmlspecialchars($row['title'], ENT_HTML5, "UTF-8"); ?>
