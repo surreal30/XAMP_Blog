@@ -35,7 +35,7 @@ if($result === false)
             {
             ?>
                 <h2> <?php echo htmlEscape($row['title']);?> </h2>
-                <div> <?php echo $row['created_at'];?> </div>
+                <div> <?php echo convertSqlDate($row['created_at']);?> </div>
                 <p> <?php echo htmlEscape($row['body']);?> </p>
                 <p>
                     <a href="view_post.php?post_id=<?php echo $row['id']; ?>">Read more...</a>
