@@ -2,11 +2,6 @@
 
 require_once "lib/common.php";
 
-
-// $root = __DIR__;
-// $database = $root . '/data/data.sqlite';
-// $dsn = 'sqlite:' . $database;
-
 $pdo = getPDO();
 
 $result = $pdo->query("
@@ -39,9 +34,9 @@ if($result === false)
             while($row = $result->fetch(PDO::FETCH_ASSOC))
             {
             ?>
-                <h2> <?php echo $row['title'];?> </h2>
+                <h2> <?php echo htmlEscape($row['title']);?> </h2>
                 <div> <?php echo $row['created_at'];?> </div>
-                <p> <?php echo $row['body'];?> </p>
+                <p> <?php echo htmlEscape($row['body']);?> </p>
                 <p>
                     <a href="view_post.php?post_id=<?php echo $row['id']; ?>">Read more...</a>
                 </p>

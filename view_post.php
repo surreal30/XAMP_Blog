@@ -44,7 +44,7 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>
-		A blog Application | <?php echo htmlspecialchars($row['title'], ENT_HTML5, "UTF-8"); ?>
+		A blog Application | <?php echo htmlEscape($row['title']); ?> 
 	</title>
 </head>
 <body>
@@ -52,7 +52,7 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 	
 
 	<h2>
-		<?php echo htmlspecialchars($row['title'], ENT_HTML5, "UTF-8"); ?>
+		<?php echo htmlEscape($row['title']); ?>
 	</h2>
 
 	<div>
@@ -60,7 +60,7 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 	</div>
 
 	<p>
-		<?php echo $row['body']; ?>
+		<?php echo htmlEscape($row['body']); ?>
 	</p>
 
 </body>
