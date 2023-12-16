@@ -37,6 +37,10 @@ if($result === false)
 
 $row = $query->fetch(PDO::FETCH_ASSOC);
 
+// Swap carriage return for paragraph breaks
+$bodyText = htmlEscape($row['body']);
+$paraText = str_replace("\n", "</p><p>", $bodyText);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,7 +64,7 @@ $row = $query->fetch(PDO::FETCH_ASSOC);
 	</div>
 
 	<p>
-		<?php echo htmlEscape($row['body']); ?>
+		<?php echo $paraText; ?>
 	</p>
 
 </body>
