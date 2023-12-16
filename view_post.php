@@ -1,8 +1,6 @@
 <?php
 
-$root = __DIR__;
-$database = $root . '/data/data.sqlite';
-$dsn = 'sqlite:' . $database;
+require_once "lib/common.php";
 
 if(isset($_GET['post_id']))
 {
@@ -13,7 +11,7 @@ else
 	$id = 0;
 }
 
-$pdo = new PDO($dsn);
+$pdo = getPDO();
 
 $sql = "SELECT 
   title, 

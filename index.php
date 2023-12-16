@@ -1,10 +1,13 @@
 <?php
 
-$root = __DIR__;
-$database = $root . '/data/data.sqlite';
-$dsn = 'sqlite:' . $database;
+require_once "lib/common.php";
 
-$pdo = new PDO($dsn);
+
+// $root = __DIR__;
+// $database = $root . '/data/data.sqlite';
+// $dsn = 'sqlite:' . $database;
+
+$pdo = getPDO();
 
 $result = $pdo->query("
         SELECT 
@@ -31,10 +34,8 @@ if($result === false)
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     </head>
     <body>
-        <?php require_once "templates/title.php"; ?>
-        <!-- <h1>Blog title</h1>
-        <p>This paragraph summarises what the blog is about.</p> -->
-        <?php
+        <?php require_once "templates/title.php";
+
             while($row = $result->fetch(PDO::FETCH_ASSOC))
             {
             ?>
