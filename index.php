@@ -8,6 +8,7 @@ $pdo = new PDO($dsn);
 
 $result = $pdo->query("
         SELECT 
+          id,
           title, 
           created_at, 
           body 
@@ -40,7 +41,7 @@ if($result === false)
                 <div> <?php echo $row['created_at'];?> </div>
                 <p> <?php echo $row['body'];?> </p>
                 <p>
-                    <a href="#">Read more...</a>
+                    <a href="view_post.php?post_id=<?php echo $row['id']; ?>">Read more...</a>
                 </p>
             <?php
             }
