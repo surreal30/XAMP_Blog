@@ -2,6 +2,7 @@
  * Database creation script
  */
 DROP TABLE IF EXISTS post;
+
 CREATE TABLE post (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     title VARCHAR NOT NULL,
@@ -10,6 +11,7 @@ CREATE TABLE post (
     created_at VARCHAR NOT NULL,
     updated_at VARCHAR
 );
+
 INSERT INTO
     post
     (
@@ -23,6 +25,7 @@ It is split into paragraphs.",
         date('now', '-2 months')
     )
 ;
+
 INSERT INTO
     post
     (
@@ -36,6 +39,7 @@ This is another paragraph.",
         date('now', '-40 days')
     )
 ;
+
 INSERT INTO
     post
     (
@@ -47,5 +51,47 @@ INSERT INTO
 This is split into paragraphs.",
         1,
         date('now', '-13 days')
+    )
+
+;
+
+DROP TABLE IF EXISTS comment;
+
+CREATE TABLE comment (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    post_id INTEGER NOT NULL,
+    created_at VARCHAR NOT NULL,
+    name VARCHAR NOT NULL,
+    website VARCHAR NOT NULL,
+    text VARCHAR NOT NULL
+);
+
+INSERT INTO
+    comment
+    (
+        post_id, created_at, name, website, text
+    )
+    VALUES
+    (
+        1,
+        date('now', '-10 days'),
+        'Jimmy',
+        'http://example.com',
+        'A great contribution'
+    )
+;
+
+INSERT INTO
+    comment
+    (
+        post_id, created_at, name, website, text
+    )
+    VALUES
+    (
+        1,
+        date('now', '-8 days'),
+        'Robert',
+        'http://rob.com',
+        'Appreciate it!'
     )
 ;

@@ -12,6 +12,7 @@ if (is_readable($database) && filesize($database) > 0)
 {
     $error = 'Please delete the existing database manually before installing it afresh';
 }
+
 // Create an empty file for the database
 if (!$error)
 {
@@ -24,6 +25,7 @@ if (!$error)
         );
     }
 }
+
 // Grab the SQL commands we want to run on the database
 if (!$error)
 {
@@ -33,6 +35,7 @@ if (!$error)
         $error = 'Cannot find SQL file';
     }
 }
+
 // Connect to the new database and try to run the SQL commands
 if (!$error)
 {
@@ -43,17 +46,23 @@ if (!$error)
         $error = 'Could not run SQL: ' . print_r($pdo->errorInfo(), true);
     }
 }
+
 // See how many rows we created, if any
-$count = null;
-if (!$error)
+$count = [];
+
+foreach (['post', 'comment'] as $tableName)
 {
-    $sql = "SELECT COUNT(*) AS c FROM post";
-    $stmt = $pdo->query($sql);
-    if ($stmt)
+    if(!$error)
     {
-        $count = $stmt->fetchColumn();
+        $sql = "SELECT COUNT(*) AS c FROM " . $tableName;
+        $stmt = $pdo->query($sql);
+        if ($stmt)
+        {
+            $count[$tableName] = $stmt->fetchColumn();
+        }
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -81,10 +90,15 @@ if (!$error)
             </div>
         <?php else: ?>
             <div class="success box">
-                The database and demo data was created OK.
-                <?php if ($count): ?>
-                    <?php echo $count ?> new rows were created.
-                <?php endif ?>
+                The database and demo data was created OK. <br>
+                <?php foreach (['post', 'comment'] as $tableName)
+                {
+                    if(isset($count[$tableName]))
+                    {
+                        echo $count[$tableName] . " new " . $tableName . " were created! <br>";
+                    }
+                }
+                ?>
             </div>
         <?php endif ?>
     </body>
