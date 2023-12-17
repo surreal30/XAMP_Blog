@@ -15,6 +15,11 @@ else
 $pdo = getPDO();
 $row = getPostRow($pdo, $id);
 
+if(!$row)
+{
+    redirectAndExit("index.php?not_found=1");
+}
+
 // Swap carriage return for paragraph breaks
 $bodyText = htmlEscape($row['body']);
 $paraText = str_replace("\n", "</p><p>", $bodyText);
