@@ -22,7 +22,7 @@ INSERT INTO
         "This is the body of the first post.
 It is split into paragraphs.",
         1,
-        date('now', '-2 months')
+        datetime('now', '-2 months', '-45 minutes', '+10 seconds')
     )
 ;
 
@@ -36,7 +36,7 @@ INSERT INTO
         "This is the body of the second post.
 This is another paragraph.",
         1,
-        date('now', '-40 days')
+        datetime('now', '-40 days', '+815 minutes', '-42 seconds')
     )
 ;
 
@@ -50,7 +50,7 @@ INSERT INTO
         "This is the body of the third post.
 This is split into paragraphs.",
         1,
-        date('now', '-13 days')
+        datetime('now', '-13 days', '+21 minutes', '+213 seconds')
     )
 
 ;
@@ -74,7 +74,7 @@ INSERT INTO
     VALUES
     (
         1,
-        date('now', '-10 days'),
+        datetime('now', '-10 days', '-122 minutes', '-12 minutes'),
         'Jimmy',
         'http://example.com',
         'A great contribution'
@@ -89,7 +89,7 @@ INSERT INTO
     VALUES
     (
         1,
-        date('now', '-8 days'),
+        datetime('now', '-8 days', '+23 minutes', '+78 seconds'),
         'Robert',
         'http://rob.com',
         'Appreciate it!'
