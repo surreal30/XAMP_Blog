@@ -67,5 +67,31 @@ $paraText = str_replace("\n", "</p><p>", $bodyText);
 		<?php echo $paraText; ?>
 	</p>
 
+    <h3>
+        <?php echo countCommentsForPost($id) . " comments"; ?>
+    </h3>
+
+    <hr>
+
+    <?php
+        foreach (getCommentsForPost($id) as $comment)
+        {
+        ?>
+            <div class = "comment">
+                <div class = "comment-meta">
+                    Comment from:
+                    <?php echo htmlEscape($comment['name']); ?>
+                    on
+                    <?php echo htmlEscape($comment['created_at']); ?>
+                </div>
+                <div class = "comment-body">
+                    <?php echo htmlEscape($comment['text']); ?>
+                </div>
+                
+            </div>
+        <?php
+        } ?>
+    
+
 </body>
 </html>
