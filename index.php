@@ -36,6 +36,7 @@ if($result === false)
             ?>
                 <h2> <?php echo htmlEscape($row['title']);?> </h2>
                 <div> <?php echo convertSqlDate($row['created_at']);?> </div>
+                <?php echo countCommentsForPost($row['id']); ?> comments
                 <p> <?php echo htmlEscape($row['body']);?> </p>
                 <p>
                     <a href="view_post.php?post_id=<?php echo $row['id']; ?>">Read more...</a>

@@ -58,3 +58,21 @@ function convertSqlDate($sqlDate)
 
 	return $date->format('d-m-y');
 }
+
+/**
+ * Return number of comments for the post
+ * 
+ * @param integer $postId
+ * @return integer
+ */
+function countCommentsForPost($postId)
+{
+	$pdo = getPDO();
+
+	$sql = "SELECT COUNT(*) FROM comment WHERE post_id = ?";
+	$query = $pdo->prepare($sql);
+	$query->execute([$postId]);
+
+	return (int) $query->fetchColumn();
+
+}
