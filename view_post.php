@@ -1,6 +1,7 @@
 <?php
 
 require_once "lib/common.php";
+require_once "lib/view_post.php";
 
 if(isset($_GET['post_id']))
 {
@@ -12,30 +13,7 @@ else
 }
 
 $pdo = getPDO();
-
-$sql = "SELECT 
-  title, 
-  created_at, 
-  body 
-FROM 
-  post 
-WHERE 
-  id = ?
-";
-
-$query = $pdo->prepare($sql);
-if($query === false)
-{
-	throw new Exception("Error while preparing the query");
-}
-
-$result = $query->execute([$id]);
-if($result === false)
-{
-	throw new Exception("Error while executing the query");
-}
-
-$row = $query->fetch(PDO::FETCH_ASSOC);
+$row = getPostRow($pdo, $id);
 
 // Swap carriage return for paragraph breaks
 $bodyText = htmlEscape($row['body']);
