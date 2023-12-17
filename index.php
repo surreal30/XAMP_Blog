@@ -20,6 +20,8 @@ if($result === false)
 {
     throw new Exception("Error in running this query");
 }
+
+$notFound = isset($_GET['not_found']);
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +33,14 @@ if($result === false)
     <body>
         <?php require_once "templates/title.php";
 
+            if($notFound)
+            {
+            ?>
+                <div style="border: 1px solid #ff6666; padding: 6px;">
+                    Error: cannot find the requested blog post
+                </div>
+            <?php
+            }
             while($row = $result->fetch(PDO::FETCH_ASSOC))
             {
             ?>
