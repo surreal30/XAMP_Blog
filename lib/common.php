@@ -115,3 +115,8 @@ function convertNewlinesToParagraph($text)
 
 	return "<p>" . str_replace("\n", "</p><p>", $escaped);
 }
+
+function getSqlDateForNow()
+{
+    return date('Y-m-d H:i:s');
+}

@@ -74,7 +74,7 @@ function addCommentToPost(PDO $pdo, $postId, array $commentData)
 					created_at
 				)
 				VALUES
-				(?, ?, ?, ?, datetime('now'))";
+				(?, ?, ?, ?, ?)";
 				
 		$query = $pdo->prepare($sql);
 
@@ -83,7 +83,7 @@ function addCommentToPost(PDO $pdo, $postId, array $commentData)
 			throw new Exception('Cannot prepare statement to insert comment');
 		}
 
-		$result = $query->execute([$commentData['name'], $commentData['website'], $commentData['text'], $postId]);
+		$result = $query->execute([$commentData['name'], $commentData['website'], $commentData['text'], $postId, getSqlDateForNow()]);
 
 
 		if($result === false)
