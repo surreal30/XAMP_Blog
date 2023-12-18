@@ -46,10 +46,6 @@ else
     ];
 }
 
-// Swap carriage return for paragraph breaks
-$bodyText = htmlEscape($row['body']);
-$paraText = str_replace("\n", "</p><p>", $bodyText);
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,7 +69,7 @@ $paraText = str_replace("\n", "</p><p>", $bodyText);
 	</div>
 
 	<p>
-		<?php echo $paraText; ?>
+		<?php echo convertNewlinesToParagraph($row['body']); ?>
 	</p>
 
     <h3>
@@ -94,7 +90,7 @@ $paraText = str_replace("\n", "</p><p>", $bodyText);
                     <?php echo htmlEscape($comment['created_at']); ?>
                 </div>
                 <div class = "comment-body">
-                    <?php echo htmlEscape($comment['text']); ?>
+                    <?php echo convertNewlinesToParagraph($comment['text']); ?>
                 </div>
                 
             </div>

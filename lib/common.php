@@ -103,3 +103,15 @@ function redirectAndExit($script)
 	header("location: " . $fullUrl);
 	exit();
 }
+
+/**
+ * Convert unsafe text to safe, paragraphed, HTML
+ * @param string $text
+ * @return string
+ */
+function convertNewlinesToParagraph($text)
+{
+	$escaped = htmlEscape($text);
+
+	return "<p>" . str_replace("\n", "</p><p>", $escaped);
+}
