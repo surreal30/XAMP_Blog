@@ -20,6 +20,24 @@ if(!$row)
     redirectAndExit("index.php?not_found=1");
 }
 
+$errors = null;
+
+if($_POST)
+{
+    $commentData = [
+        "name"    => $_POST["comment-name"],
+        "website" => $_POST["comment-website"],
+        "text"    => $_POST["comment-text"]
+    ];
+
+    $errors = addCommentToPost($pdo, $id, $commentData);
+
+    if(!$errors)
+    {
+        redirectAndExit("view_post.php?post_id=" . $id);
+    }
+}
+
 // Swap carriage return for paragraph breaks
 $bodyText = htmlEscape($row['body']);
 $paraText = str_replace("\n", "</p><p>", $bodyText);
@@ -74,6 +92,8 @@ $paraText = str_replace("\n", "</p><p>", $bodyText);
             </div>
         <?php
         } ?>
+
+    <?php require_once "templates/comment_form.php"; ?>
     
 
 </body>

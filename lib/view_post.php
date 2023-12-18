@@ -70,14 +70,21 @@ function addCommentToPost(PDO $pdo, $postId, array $commentData)
 					name,
 					website,
 					text,
-					post_id
+					post_id,
+					created_at
 				)
 				VALUES
-				(?, ?, ?, ?)";
+				(?, ?, ?, ?, datetime('now'))";
 				
 		$query = $pdo->prepare($sql);
 
+		if($query === false)
+		{
+			throw new Exception('Cannot prepare statement to insert comment');
+		}
+
 		$result = $query->execute([$commentData['name'], $commentData['website'], $commentData['text'], $postId]);
+
 
 		if($result === false)
 		{
@@ -90,4 +97,6 @@ function addCommentToPost(PDO $pdo, $postId, array $commentData)
 			}
 		}
 	}
+
+	return $errors;
 }
