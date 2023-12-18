@@ -37,6 +37,14 @@ if($_POST)
         redirectAndExit("view_post.php?post_id=" . $id);
     }
 }
+else
+{
+    $commentData = [
+        "name" => '',
+        "website" => '',
+        "text" => ''
+    ];
+}
 
 // Swap carriage return for paragraph breaks
 $bodyText = htmlEscape($row['body']);
