@@ -8,12 +8,13 @@ if(version_compare(PHP_VERSION, '5.3.7') < 0)
 	throw new Exception("This system needs PHP 5.3.7 or late");
 }
 
+session_start();
+
 $username = '';
 // Handle the form posting
 if($_POST)
 {
-	// Initialise database and session
-	session_start();
+	// Initialise database
 	$pdo = getPDO();
 
 	// Redirect only if the password is correct

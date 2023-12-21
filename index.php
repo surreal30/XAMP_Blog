@@ -2,6 +2,8 @@
 
 require_once "lib/common.php";
 
+session_start();
+
 $pdo = getPDO();
 
 $result = $pdo->query("

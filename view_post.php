@@ -3,6 +3,8 @@
 require_once "lib/common.php";
 require_once "lib/view_post.php";
 
+session_start();
+
 if(isset($_GET['post_id']))
 {
 	$id = $_GET['post_id'];
