@@ -113,7 +113,17 @@ function createUser($pdo, $username, $length = 10)
 
     if(!$error)
     {
-        $result = $query->execute([$username, $password, getSqlDateForNow()]);
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        if($hash === false)
+        {
+            $error = "Password hashing failed";
+        }
+    }
+
+    if(!$error)
+    {
+        $result = $query->execute([$username, $hash, getSqlDateForNow()]);
 
         if($result === false)
         {
