@@ -3,12 +3,12 @@
 /** 
  * blog installer function
  * 
+ * 
+ * @param \PDO $pdo
  * @return array(count array, error string)
  */
-function installBlog()
+function installBlog(PDO $pdo)
 {
-
-
     $root = getRootPath();
     $database = getDatabasePath();
 
@@ -46,7 +46,6 @@ function installBlog()
     // Connect to the new database and try to run the SQL commands
     if (!$error)
     {
-        $pdo = getPDO();
         $result = $pdo->exec($sql);
         if ($result === false)
         {

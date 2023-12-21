@@ -9,7 +9,8 @@ session_start();
 // Only run the installer when responding to form
 if($_POST)
 {
-    list($_SESSION['count'], $_SESSION['error']) = installBlog();
+    $pdo = getPDO();
+    list($_SESSION['count'], $_SESSION['error']) = installBlog($pdo);
 
     redirectAndExit('install.php');
 }
