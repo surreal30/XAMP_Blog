@@ -49,19 +49,7 @@ if(isset($_SESSION['try-install']))
     <head>
         <title>Blog installer</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <style type="text/css">
-            .box {
-                border: 1px dotted silver;
-                border-radius: 5px;
-                padding: 4px;
-            }
-            .error {
-                background-color: #ff6666;
-            }
-            .success {
-                background-color: #88ff88;
-            }
-        </style>
+        <?php require "templates/head.php"; ?>
     </head>
     <body>
         <?php if($attempted): ?>
@@ -85,7 +73,7 @@ if(isset($_SESSION['try-install']))
 
                     <?php // Report new password ?>
                     The new '<?php echo htmlEscape($username); ?>' password is
-                    <span style="font-size: 1.2 em;">
+                    <span class="install password">
                         <?php echo htmlEscape($password); ?>
                     </span> (You can copy it if you want.)
                 </div>

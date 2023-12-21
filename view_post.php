@@ -57,6 +57,7 @@ else
 	<title>
 		A blog Application | <?php echo htmlEscape($row['title']); ?> 
 	</title>
+    <?php require 'templates/head.php'; ?>
 </head>
 <body>
     <?php require_once "templates/title.php"; ?>

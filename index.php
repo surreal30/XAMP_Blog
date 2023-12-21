@@ -30,6 +30,7 @@ $notFound = isset($_GET['not_found']);
 <html>
     <head>
         <title>A blog application</title>
+        <?php require "templates/head.php"; ?>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     </head>
     <body>
@@ -38,7 +39,7 @@ $notFound = isset($_GET['not_found']);
             if($notFound)
             {
             ?>
-                <div style="border: 1px solid #ff6666; padding: 6px;">
+                <div class="error box">
                     Error: cannot find the requested blog post
                 </div>
             <?php
