@@ -158,3 +158,13 @@ function login($username)
 
 	$_SESSION['logged_in_username'] = $username;
 }
+
+/**
+ * Check if the user is logged in or not
+ * 
+ * @return bool
+ */
+function isLoggedIn()
+{
+	return isset($_SESSION['logged_in_username']);
+}
