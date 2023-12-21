@@ -120,3 +120,41 @@ function getSqlDateForNow()
 {
     return date('Y-m-d H:i:s');
 }
+
+/**
+ * Check if the username and password are correct or not
+ * 
+ * @param PDO $pdo
+ * @param string $username
+ * @param string $password
+ */
+function tryLogin(PDO $pdo, $username, $password)
+{
+	$sql = "SELECT
+			password 
+		FROM
+			user
+		WHERE
+		username = ?
+	";
+
+	$query = $pdo->prepare($sql);
+	$query->execute([$username]);
+
+	$hash = $query->fetchColumn();
+	$success = password_verify($password, $hash);
+
+	return $success;
+}
+
+/**
+ * Log the user in
+ * 
+ * @param string $username
+ */
+function login($username)
+{
+	session_start();
+
+	$_SESSION['logged_in_username'] = $username;
+}
