@@ -17,7 +17,7 @@
 
 <h3>Add your comments</h3>
 
-<form method="post" class="comment-form">
+<form method="post" class="user-form">
 	<div>
 		<label for="comment-name">
 			Name:
