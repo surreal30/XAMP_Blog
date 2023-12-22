@@ -77,14 +77,14 @@ else
 	</p>
 
     <h3>
-        <?php echo countCommentsForPost($id) . " comments"; ?>
+        <?php echo countCommentsForPost($pdo, $id) . " comments"; ?>
     </h3>
 
     <hr>
 
     <div class="comment-list">
         <?php
-            foreach (getCommentsForPost($id) as $comment)
+            foreach (getCommentsForPost($pdo, $id) as $comment)
             {
             ?>
                 <div class = "comment">

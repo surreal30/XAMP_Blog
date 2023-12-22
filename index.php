@@ -56,7 +56,7 @@ $notFound = isset($_GET['not_found']);
                             <?php echo convertSqlDate($row['created_at']);?>
                                 
                             </div>
-                        <?php echo countCommentsForPost($row['id']); ?> comments
+                        <?php echo countCommentsForPost($pdo, $row['id']); ?> comments
                         <p> <?php echo htmlEscape($row['body']);?> </p>
                         <div class="read-more">
                             <p>
