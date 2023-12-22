@@ -62,12 +62,13 @@ else
 <body>
     <?php require_once "templates/title.php"; ?>
 	
+    <div class="post">
+    	<h2>
+    		<?php echo htmlEscape($row['title']); ?>
+    	</h2>
+    </div>
 
-	<h2>
-		<?php echo htmlEscape($row['title']); ?>
-	</h2>
-
-	<div>
+	<div class="date">
 		<?php echo convertSqlDate($row['created_at']); ?>
 	</div>
 
@@ -81,24 +82,27 @@ else
 
     <hr>
 
-    <?php
-        foreach (getCommentsForPost($id) as $comment)
-        {
-        ?>
-            <div class = "comment">
-                <div class = "comment-meta">
-                    Comment from:
-                    <?php echo htmlEscape($comment['name']); ?>
-                    on
-                    <?php echo htmlEscape($comment['created_at']); ?>
-                </div>
-                <div class = "comment-body">
-                    <?php echo convertNewlinesToParagraph($comment['text']); ?>
-                </div>
-                
-            </div>
+    <div class="comment-list">
         <?php
-        } ?>
+            foreach (getCommentsForPost($id) as $comment)
+            {
+            ?>
+                <div class = "comment">
+                    <div class = "comment-meta">
+                        Comment from:
+                        <?php echo htmlEscape($comment['name']); ?>
+                        on
+                        <?php echo htmlEscape($comment['created_at']); ?>
+                    </div>
+                    <div class = "comment-body">
+                        <?php echo convertNewlinesToParagraph($comment['text']); ?>
+                    </div>
+                    
+                </div>
+            <?php
+            } 
+        ?>
+    </div>
 
     <?php require_once "templates/comment_form.php"; ?>
     

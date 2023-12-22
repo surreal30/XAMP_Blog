@@ -44,18 +44,29 @@ $notFound = isset($_GET['not_found']);
                 </div>
             <?php
             }
-            while($row = $result->fetch(PDO::FETCH_ASSOC))
-            {
             ?>
-                <h2> <?php echo htmlEscape($row['title']);?> </h2>
-                <div> <?php echo convertSqlDate($row['created_at']);?> </div>
-                <?php echo countCommentsForPost($row['id']); ?> comments
-                <p> <?php echo htmlEscape($row['body']);?> </p>
-                <p>
-                    <a href="view_post.php?post_id=<?php echo $row['id']; ?>">Read more...</a>
-                </p>
+            <div class="post-list">
             <?php
-            }
-        ?>        
+                while($row = $result->fetch(PDO::FETCH_ASSOC))
+                {
+                ?>
+                    <div class="post-synopsis">
+                        <h2> <?php echo htmlEscape($row['title']);?> </h2>
+                        <div class="meta">
+                            <?php echo convertSqlDate($row['created_at']);?>
+                                
+                            </div>
+                        <?php echo countCommentsForPost($row['id']); ?> comments
+                        <p> <?php echo htmlEscape($row['body']);?> </p>
+                        <div class="read-more">
+                            <p>
+                                <a href="view_post.php?post_id=<?php echo $row['id']; ?>">Read more...</a>
+                            </p>
+                        </div>
+                    </div>
+                <?php
+                }
+            ?>     
+            </div>   
     </body>
 </html>

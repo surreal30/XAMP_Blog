@@ -4,7 +4,6 @@
  * @var $commentData array
  */
 ?>
-<hr>
 
 <?php if($errors): ?>
 	<div class="error box">
