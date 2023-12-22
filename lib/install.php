@@ -73,7 +73,7 @@ function installBlog(PDO $pdo)
 }
 
 /**
- * Create a new user in database
+ * Update the admin user in the table
  * 
  * @param PDO $pdo
  * @param string $username
@@ -94,14 +94,12 @@ function createUser($pdo, $username, $length = 10)
     }
 
     // Insert in database
-    $sql = "INSERT INTO
+    $sql = "UPDATE
         user 
-        (
-            username, password, created_at
-        ) 
-        VALUES (
-            ?, ?, ?
-        )
+        SET
+            password = ?, created_at = ?, is_enabled = 1
+        WHERE
+        username = ?
     ";
 
     $query = $pdo->prepare($sql);
@@ -123,7 +121,7 @@ function createUser($pdo, $username, $length = 10)
 
     if(!$error)
     {
-        $result = $query->execute([$username, $hash, getSqlDateForNow()]);
+        $result = $query->execute([$hash, getSqlDateForNow(), $username]);
 
         if($result === false)
         {
