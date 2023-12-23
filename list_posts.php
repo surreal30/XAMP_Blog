@@ -4,6 +4,12 @@ require_once "lib/common.php";
 
 session_start();
 
+// Non-auth users are redirected
+if(!isLoggedIn())
+{
+	redirectAndExit("index.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html>
