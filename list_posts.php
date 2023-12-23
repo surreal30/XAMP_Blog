@@ -32,6 +32,9 @@ if(!isLoggedIn())
 						Title of the first post
 					</td>
 					<td>
+                            dd MM YYYY h:mi
+                    </td>
+					<td>
 						<a href="edit_post.php?post_id=1">Edit</a>
 					</td>
 					<td>
@@ -43,6 +46,9 @@ if(!isLoggedIn())
 						Title of the second post
 					</td>
 					<td>
+                            dd MM YYYY h:mi
+                    </td>
+					<td>
 						<a href="edit_post.php?post_id=2">Edit</a>
 					</td>
 					<td>
@@ -53,6 +59,9 @@ if(!isLoggedIn())
 					<td>
 						Title of the third post
 					</td>
+					<td>
+                            dd MM YYYY h:mi
+                    </td>
 					<td>
 						<a href="edit_post.php?post_id=3">Edit</a>
 					</td>
