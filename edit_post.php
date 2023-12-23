@@ -85,7 +85,13 @@ if($_POST)
 	<?php require_once "templates/head.php"; ?>
 </head>
 <body>
-	<?php require_once "templates/title.php"; ?>
+	<?php require_once "templates/top_menu.php"; ?>
+
+	<?php if(isset($_GET['post_id'])): ?>
+		<h1>Edit Post</h1>
+	<?php else: ?>
+		<h1>New Post</h1>
+	<?php endif; ?>
 
 	<?php if($errors): ?>
 		<div class="error box">
