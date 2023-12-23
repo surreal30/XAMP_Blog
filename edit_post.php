@@ -1,6 +1,7 @@
 <?php
 
 require_once 'lib/common.php';
+require_once 'lib/edit_post.php';
 
 session_start();
 
@@ -9,6 +10,41 @@ if(!isLoggedIn())
 	redirectAndExit('index.php');
 }
 
+// Handle post operations
+$errors = [];
+if($_POST)
+{
+	// Validate input
+	$title = $_POST['post-title'];
+	if(!$title)
+	{
+		$errors[] = "The post must have a title";
+	}
+
+	$body = $_POST['post-body'];
+	if(!$body)
+	{
+		$errors[] = "The post must have a body";
+
+	}
+
+	if(!$errors)
+	{
+		$pdo = getPDO();
+		$userId = getAuthUserId($pdo);
+		$postId = addPost($pdo, $title, $body, $userId);
+
+		if($postId === false)
+		{
+			$errors[] = "Post operations failed";
+		}
+	}
+
+	if(!$errors)
+	{
+		redirectAndExit("edit_post.php?post_id=" . $postId);
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +57,16 @@ if(!isLoggedIn())
 </head>
 <body>
 	<?php require_once "templates/title.php"; ?>
+
+	<?php if($errors): ?>
+		<div class="error box">
+			<ul>
+				<?php foreach ($errors as $error): ?>
+					<li><?php echo $error; ?></li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	<?php endif; ?>
 
 	<form method="post" class="post-form user-form">
 		<div>

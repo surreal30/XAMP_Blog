@@ -189,3 +189,26 @@ function getAuthUser()
 {
 	return isLoggedIn() ? $_SESSION['logged_in_username'] : null;
 }
+
+// Look up user ID of current user
+function getAuthUserId(PDO $pdo)
+{
+	if(!isLoggedIn())
+	{
+		return null;
+	}
+
+	$sql = "
+		SELECT
+			id
+		FROM
+			user
+		WHERE 
+		username = ?
+	";
+
+	$query = $pdo->prepare($sql);
+	$query->execute([getAuthUser()]);
+
+	return $query->fetchColumn();
+}
