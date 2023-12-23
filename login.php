@@ -10,6 +10,12 @@ if(version_compare(PHP_VERSION, '5.3.7') < 0)
 
 session_start();
 
+// If user is loggedin redirect to index
+if(isLoggedIn())
+{
+	redirectAndExit("index.php");
+}
+
 $username = '';
 // Handle the form posting
 if($_POST)
