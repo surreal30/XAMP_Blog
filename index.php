@@ -5,23 +5,7 @@ require_once "lib/common.php";
 session_start();
 
 $pdo = getPDO();
-
-$result = $pdo->query("
-        SELECT 
-          id,
-          title, 
-          created_at, 
-          body 
-        FROM 
-          post 
-        ORDER BY 
-          created_at DESC
-    ");
-
-if($result === false)
-{
-    throw new Exception("Error in running this query");
-}
+$posts = getAllPosts($pdo);
 
 $notFound = isset($_GET['not_found']);
 ?>
@@ -47,7 +31,7 @@ $notFound = isset($_GET['not_found']);
             ?>
             <div class="post-list">
             <?php
-                while($row = $result->fetch(PDO::FETCH_ASSOC))
+                foreach($posts as $row)
                 {
                 ?>
                     <div class="post-synopsis">

@@ -212,3 +212,32 @@ function getAuthUserId(PDO $pdo)
 
 	return $query->fetchColumn();
 }
+
+/**
+ * Get a list of posts in reverse order
+ * 
+ * 
+ * @param PDO $pdo
+ * @return array
+ */
+function getAllPosts(PDO $pdo)
+{
+	$result = $pdo->query("
+	        SELECT 
+	          id,
+	          title, 
+	          created_at, 
+	          body 
+	        FROM 
+	          post 
+	        ORDER BY 
+	          created_at DESC
+	    ");
+
+	if($result === false)
+	{
+	    throw new Exception("Error in running this query");
+	}
+
+	return $result->fetchAll(PDO::FETCH_ASSOC);
+}
