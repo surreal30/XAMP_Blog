@@ -22,5 +22,5 @@ function addPost(PDO $pdo, $title, $body, $userId)
 		throw new Exception("Couldn't execute the query");
 	}
 
-	return $pdo->lastInsertId;
+	return $pdo->lastInsertId();
 }

@@ -2,6 +2,7 @@
 
 require_once 'lib/common.php';
 require_once 'lib/edit_post.php';
+require_once 'lib/view_post.php';
 
 session_start();
 
@@ -9,6 +10,12 @@ if(!isLoggedIn())
 {
 	redirectAndExit('index.php');
 }
+
+// Empty defaults
+$title = $body = '';
+
+// Initialise database
+$pdo = getPDO();
 
 // Handle post operations
 $errors = [];
@@ -45,6 +52,15 @@ if($_POST)
 		redirectAndExit("edit_post.php?post_id=" . $postId);
 	}
 }
+elseif(isset($_GET['post_id']))
+{
+	$post = getPostRow($pdo, $_GET['post_id']);
+	if($post)
+	{
+		$title = $post['title'];
+		$body = $post['body'];
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -71,11 +87,11 @@ if($_POST)
 	<form method="post" class="post-form user-form">
 		<div>
 			<label for="post-title">Title:</label>
-			<input type="text" name="post-title" id="post-title">
+			<input type="text" name="post-title" id="post-title" value="<?php echo htmlEscape($title); ?>">
 		</div>
 		<div>
 			<label for="post-body">Body:</label>
-			<textarea id="post-body" name="post-body" rows="12" cols="70"></textarea>
+			<textarea id="post-body" name="post-body" rows="12" cols="70"><?php echo htmlEscape($body); ?></textarea>
 		</div>
 		<div>
 			<input type="submit" name="submit" value="Save post">
