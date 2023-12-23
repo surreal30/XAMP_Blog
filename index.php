@@ -58,10 +58,11 @@ $notFound = isset($_GET['not_found']);
                             </div>
                         <?php echo countCommentsForPost($pdo, $row['id']); ?> comments
                         <p> <?php echo htmlEscape($row['body']);?> </p>
-                        <div class="read-more">
-                            <p>
+                        <div class="post-controls">
                                 <a href="view_post.php?post_id=<?php echo $row['id']; ?>">Read more...</a>
-                            </p>
+                                <?php if(isLoggedIn()): ?>
+                                    <a href="edit_post.php?post_id=.<?php echo $row['id']; ?>">Edit</a>
+                                <?php endif; ?>
                         </div>
                     </div>
                 <?php
