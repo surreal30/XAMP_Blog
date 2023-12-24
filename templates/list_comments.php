@@ -5,7 +5,7 @@
  * @var $postID Integer
  */
 ?>
-<div class="comment-list">
+<form action="view_post.php?action=delete-comment&amp;post_id=<?php echo $postId?>&amp;" method="post" class="comment-list">
 	<h3><?php echo countCommentsForPost($pdo, $postId); ?> Comments</h3>
 
 	<?php foreach (getCommentsForPost($pdo, $postId) as $comment): ?>
@@ -15,7 +15,6 @@
 				<?php echo htmlEscape($comment['name']); ?>
 				on
 				<?php echo convertSqlDate($comment['created_at']); ?>
-
 				<?php if(isLoggedIn()): ?>
 					<input type="submit" name="delete-comment[<?php echo $comment['id']; ?>]" value="delete">
 				<?php endif; ?>
@@ -25,4 +24,4 @@
 			</div>
 		</div>
 	<?php endforeach; ?>
-</div>
+</form>

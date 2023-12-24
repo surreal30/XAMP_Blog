@@ -17,7 +17,7 @@
 
 <h3>Add your comments</h3>
 
-<form method="post" class="user-form">
+<form action="view_post.php?action=add-comment&amp;post_id=<?php echo $postId?>" method="post" class="comment-form user-form">
 	<div>
 		<label for="comment-name">
 			Name:
