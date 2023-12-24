@@ -7,15 +7,15 @@ session_start();
 
 if(isset($_GET['post_id']))
 {
-	$id = $_GET['post_id'];
+	$postId = $_GET['post_id'];
 }
 else
 {
-	$id = 0;
+	$postId = 0;
 }
 
 $pdo = getPDO();
-$row = getPostRow($pdo, $id);
+$row = getPostRow($pdo, $postId);
 
 if(!$row)
 {
@@ -32,11 +32,11 @@ if($_POST)
         "text"    => $_POST["comment-text"]
     ];
 
-    $errors = addCommentToPost($pdo, $id, $commentData);
+    $errors = addCommentToPost($pdo, $postId, $commentData);
 
     if(!$errors)
     {
-        redirectAndExit("view_post.php?post_id=" . $id);
+        redirectAndExit("view_post.php?post_id=" . $postId);
     }
 }
 else
@@ -76,33 +76,9 @@ else
 		<?php echo convertNewlinesToParagraph($row['body']); ?>
 	</p>
 
-    <h3>
-        <?php echo countCommentsForPost($pdo, $id) . " comments"; ?>
-    </h3>
-
     <hr>
 
-    <div class="comment-list">
-        <?php
-            foreach (getCommentsForPost($pdo, $id) as $comment)
-            {
-            ?>
-                <div class = "comment">
-                    <div class = "comment-meta">
-                        Comment from:
-                        <?php echo htmlEscape($comment['name']); ?>
-                        on
-                        <?php echo htmlEscape($comment['created_at']); ?>
-                    </div>
-                    <div class = "comment-body">
-                        <?php echo convertNewlinesToParagraph($comment['text']); ?>
-                    </div>
-                    
-                </div>
-            <?php
-            } 
-        ?>
-    </div>
+    <?php require "templates/list_comments.php"; ?>
 
     <?php require_once "templates/comment_form.php"; ?>
     
