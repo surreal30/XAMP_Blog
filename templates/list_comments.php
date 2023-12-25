@@ -3,10 +3,11 @@
 /**
  * @var $pdo PDO
  * @var $postID Integer
+ * @var $commentCount integer
  */
 ?>
 <form action="view_post.php?action=delete-comment&amp;post_id=<?php echo $postId?>&amp;" method="post" class="comment-list">
-	<h3><?php echo countCommentsForPost($pdo, $postId); ?> Comments</h3>
+	<h3><?php echo $commentCount ?> comments</h3>
 
 	<?php foreach (getCommentsForPost($pdo, $postId) as $comment): ?>
 		<div class="comment">

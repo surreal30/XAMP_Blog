@@ -40,7 +40,7 @@ $notFound = isset($_GET['not_found']);
                             <?php echo convertSqlDate($post['created_at']);?>
                                 
                             </div>
-                        <?php echo countCommentsForPost($pdo, $post['id']); ?> comments
+                        <?php echo $post($post['comment_count']); ?> comments
                         <p> <?php echo htmlEscape($post['body']);?> </p>
                         <div class="post-controls">
                                 <a href="view_post.php?post_id=<?php echo $post['id']; ?>">Read more...</a>

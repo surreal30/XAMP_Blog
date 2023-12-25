@@ -94,7 +94,8 @@ function getPostRow(PDO $pdo, $postId)
 	$sql = "SELECT 
 	  title, 
 	  created_at, 
-	  body 
+	  body,
+	  (SELECT COUNT(*) FROM comment WHERE comment.post_id = post.id) comment_count
 	FROM 
 	  post 
 	WHERE 
