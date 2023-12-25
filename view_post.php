@@ -42,10 +42,7 @@ if($_POST)
             if(isLoggedIn())
             {
                 $deleteResponse = $_POST['delete-comment'];
-                $keys = array_keys($deleteResponse);
-                $deleteCommentId = $keys[0];
-                deleteComment($pdo, $postId, $deleteCommentId);
-                redirectAndExit("view_post.php?post_id=" . $postId);
+                handleDeleteComment($pdo, $postId, $deleteResponse);
             }
             break;
     }

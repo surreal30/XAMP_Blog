@@ -22,6 +22,34 @@ function handleAddComment(PDO $pdo, $postId, $commentData)
 }
 
 /**
+ * Called to handle delete comment form redirect afterwards
+ * 
+ * The $deleteResponsearray is expected to be in form:
+ * 		[[6] => delete]
+ * which comes directly from the input elements of this form:
+ * 		name = "delete-comment[6"
+ * 
+ * @param PDO $pdo
+ * @param integer $postId
+ * @param array $deleteResponse
+ */
+function handleDeleteComment(PDO $pdo, $postId, array $deleteResponse)
+{
+	if(isLoggedIn())
+	{
+		$deleteResponse = $_POST['delete-comment'];
+        $keys = array_keys($deleteResponse);
+        $deleteCommentId = $keys[0];
+        if($deleteCommentId)
+        {
+        	deleteComment($pdo, $postId, $deleteCommentId);
+        }
+
+        redirectAndExit("view_post.php?post_id=" . $postId);
+	}
+}
+
+/**
  * Delete the specified comment on specific post
  * 
  * @param PDO $pdo
