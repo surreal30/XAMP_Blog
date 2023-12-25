@@ -26,13 +26,29 @@ $errors = null;
 
 if($_POST)
 {
-    $commentData = [
-        "name"    => $_POST["comment-name"],
-        "website" => $_POST["comment-website"],
-        "text"    => $_POST["comment-text"]
-    ];
-
-    $errors = handleAddComment($pdo, $postId, $commentData);
+    switch ($_GET['action'])
+    {
+        case 'add-comment':
+            $commentData = [
+                "name"    => $_POST['comment-name'],
+                "website" => $_POST['comment-website'],
+                "text"    => $_POST['comment-text']
+            ];
+            $errors = handleAddComment($pdo, $postId, $commentData);
+            break;
+        
+        case 'delete-comment':
+            // Don't delete if the user is not authorised
+            if(isLoggedIn())
+            {
+                $deleteResponse = $_POST['delete-comment'];
+                $keys = array_keys($deleteResponse);
+                $deleteCommentId = $keys[0];
+                deleteComment($pdo, $postId, $deleteCommentId);
+                redirectAndExit("view_post.php?post_id=" . $postId);
+            }
+            break;
+    }
 }
 else
 {

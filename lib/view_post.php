@@ -22,10 +22,41 @@ function handleAddComment(PDO $pdo, $postId, $commentData)
 }
 
 /**
+ * Delete the specified comment on specific post
+ * 
+ * @param PDO $pdo
+ * @param integer $postId
+ * @param integer $commentId
+ * 
+ * @return boolean True if the command executed without errors
+ * @throws Exception
+ */
+function deleteComment(PDO $pdo, $postId, $commentId)
+{
+	// commentId is enough but $postId is extra safety chunk
+	$sql = "
+		DELETE FROM
+			comment
+		WHERE
+			post_id = ? AND id = ?
+	";
+
+	$query = $pdo->prepare($sql);
+	if($query === false)
+	{
+		throw new Exception("There was a problem in preparing the query");
+	}
+
+	$result = $query->execute([$postId, $commentId]);
+
+	return $result !== false;
+}
+
+/**
  * Fetch a single post
  * 
  * @param PDO $pdo
- * @param integer $postI
+ * @param integer $postId
  * @throws Exception
  */
 function getPostRow(PDO $pdo, $postId)
