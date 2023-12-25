@@ -1,5 +1,26 @@
 <?php
 
+
+/**
+ * Called to handle the comment form, redirects upon success
+ * 
+ * @param PDO $pdo
+ * @param integer $postId
+ * @param array $commentData
+ */
+function handleAddComment(PDO $pdo, $postId, $commentData)
+{
+	$errors = addCommentToPost($pdo, $postId, $commentData);
+
+	// If not error then redirect back to self and redisplay
+	if(!$errors)
+	{
+		redirectAndExit('view_post.php?post_id=' . $postId);
+	}
+
+	return $errors;
+}
+
 /**
  * Fetch a single post
  * 
