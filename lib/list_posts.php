@@ -3,6 +3,8 @@
 /**
  * Tries to delete the specified post
  * 
+ * first we delete the attached comments and then deleye the post
+ * 
  * @param PDO $pdo
  * @param integer $postId
  * @return boolean Return true on successful deletion
@@ -10,20 +12,42 @@
  */
 function deletePost(PDO $pdo, $postId)
 {
-	$sql = "
+	$sqls = [
+		// delete the comment dirst
+		"
+		DELETE FROM
+			comment
+		WHERE
+			post_id = ?
+		",
+
+		// Delete the post now
+		"
 		DELETE FROM
 			post
 		WHERE
 			id = ?
-	";
+		"
+	];
 
-	$query = $pdo->prepare($sql);
-	if($query === false)
+	foreach($sqls as $sql)
 	{
-		throw new Exception("There was a problem preparing the query");
+			$query = $pdo->prepare($sql);
+		if($query === false)
+		{
+			throw new Exception("There was a problem preparing the query");
+		}
+
+		$result = $query->execute([$postId]);
+
+		if($result === false)
+		{
+			break;
+		}
 	}
 
-	$result = $query->execute([$postId]);
+
+
 
 	return $result !== false;
 }
