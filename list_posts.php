@@ -56,8 +56,11 @@ $posts = getAllPosts($pdo);
 							<?php echo htmlEscape($post['title']); ?>
 						</td>
 						<td>
-	                            <?php echo convertSqlDate($post['created_at']); ?>
+                            <?php echo convertSqlDate($post['created_at']); ?>
 	                    </td>
+	                    <td>
+                            <?php echo $post['comment_count'] ?>
+                        </td>
 						<td>
 							<a href="edit_post.php?post_id=<?php echo $post['id']; ?>">Edit</a>
 						</td>
