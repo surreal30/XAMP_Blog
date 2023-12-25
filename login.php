@@ -58,14 +58,18 @@ if($_POST)
 
 	<p>Login here</p>
 	<form method="post">
-		<p>
-			Username: 
-			<input type="text" name="username" value="<?php echo htmlEscape($username); ?>">
-		</p>
-		<p>
-			Password: 
-			<input type="text" name="password">
-		</p>
+		<div>
+			<label for="username">
+				Username: 
+			</label>
+			<input type="text" name="username" id="username" value="<?php echo htmlEscape($username); ?>">
+		</div>
+		<div>
+			<label for="password">
+				Password: 
+			</label>
+			<input type="text" id="password" name="password">
+		</div>
 		<input type="submit" name="submit" value="Login">
 	</form>
 
