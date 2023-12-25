@@ -49,6 +49,15 @@ $posts = getAllPosts($pdo);
 
 	<form method="post">
 		<table id="post-list">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Creation Date</th>
+					<th>Comments</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
 			<tbody>
 				<?php foreach($posts as $post): ?>
 					<tr>
