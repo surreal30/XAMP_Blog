@@ -1,4 +1,4 @@
-RewriteEngine On
+RewriteEngine on
 
 RewriteCond %{REQUEST_URI} ^/(data|lib|vendor|templates)/
-RewriteRule ^ [L, R=404]
+RewriteRule ^ - [L, R=404]
